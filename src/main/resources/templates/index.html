@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>A&M shop</title>
+    <link th:href="@{/css/bootstrap.main.css}" rel="stylesheet"/>
+</head>
+<body>
+<div th:insert="~{fragments/menu :: #nav-menu}"></div>
+<div class="bg-image" style="background-image: url('images/main_background.jpeg');height: 100vh">
+    <div class="mask" style="background-color: rgba(0, 0, 0, 0.3);">
+        <div class="d-flex justify-content-center align-items-center h-100">
+            <div class="text-primary">
+                <h1 class="mb-1">A&M</h1>
+            </div>
+        </div>
+    </div>
+    <h3 class="text-primary">Clicks: <b th:text="${amountClicks}">0</b></h3>
+    <h3 class="text-primary">UUID: <b th:text="${uuid}">10</b></h3>
+</div>
+</body>
+</html>

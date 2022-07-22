@@ -1,0 +1,24 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: validate
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: ${DATABASE_URL}
+    username: ${DATABASE_USER}
+    password: ${DATABASE_PASSWORD}
+  logging:
+    level:
+      org.springframework.web: DEBUG
+      org.springframework.ws: DEBUG
+  flyway:
+    baseline-on-migrate: true
+server:
+  hostname: localhost
+  port: ${PORT:8080}
+mail:
+  server:
+    host: smtp.yandex.com
+    port: 465
+    username: al8xcode@yandex.ru
+    password: ${EMAIL_PASSWORD}

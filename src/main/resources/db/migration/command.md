@@ -1,0 +1,15 @@
+-------------------------------------------------
+-- select *
+-- from "public".users
+-------------------------------------------------
+-- select *
+-- from "public".orders
+-------------------------------------------------
+-- select *
+-- from "public".users
+-- LEFT OUTER JOIN
+-- "public".carts
+-- ON users.id = carts.user_id
+-------------------------------------------------
+-- DROP SCHEMA public CASCADE;
+-- CREATE SCHEMA public; "drop all in project"

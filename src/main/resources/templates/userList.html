@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>A&M users</title>
+    <link th:href="@{/css/bootstrap.main.css}" rel="stylesheet"/>
+</head>
+<body>
+<div th:insert="~{fragments/menu :: #nav-menu}"></div>
+<table class="table align-middle">
+    <thead>
+    <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Edit</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user : ${users}">
+        <th th:text="${user.username}" scope="row">UserName</th>
+        <td th:text="${user.email}">Email</td>
+        <td>
+            <form th:action="@{/users/delete}" type="submit" class="btn btn-link btn-sm px-3" data-ripple-color="dark">
+                <input type="hidden" name="username" th:value="${user.username}"/>
+                <input type="submit" value="delete" class="btn btn-danger"/>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<div class="card">
+    <div class="card-body">
+        <form align="left" action="/cart/removeAll" method="post">
+            <a th:href="@{/users/new}" class="btn btn-danger">Add new</a>
+        </form>
+    </div>
+</div>
+</body>
+</html>

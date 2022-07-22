@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>A&M add user</title>
+    <link th:href="@{/css/bootstrap.main.css}" rel="stylesheet"/>
+</head>
+<body>
+<div th:insert="~{fragments/menu :: #nav-menu}"></div>
+<div class="container py-1 h-100">
+    <div class="card-body p-md-5 mx-md-4">
+        <div class="text-center">
+            <form th:action="@{/users/new}" th:object="${user}" method="post">
+                <div class="form-outline mb-4">
+                    <input th:field="*{username}" type="text" id="form2Example1"
+                           class="form-control"/>
+                    <label class="form-label" for="form2Example1">Name</label>
+                </div>
+                <div class="form-outline mb-4">
+                    <input th:field="*{password}" type="password" id="form2Example2"
+                           class="form-control"/>
+                    <label class="form-label" for="form2Example2">Password</label>
+                </div>
+                <div class="form-outline mb-4">
+                    <input th:field="*{matchingPassword}" type="password" id="form2Example2"
+                           class="form-control"/>
+                    <label class="form-label" for="form2Example2">Matching</label>
+                </div>
+                <div class="form-outline mb-4">
+                    <input th:field="*{email}" type="email" id="form2Example1"
+                           class="form-control"/>
+                    <label class="form-label" for="form2Example1">Email</label>
+                </div>
+                <div class="form-outline mb-4">
+                    <input th:field="*{role}" type="text" id="form2Example1" class="form-control"/>
+                    <label class="form-label" for="form2Example1">Role</label>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block mb-4">Save</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

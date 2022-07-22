@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>A&M cart</title>
+    <link th:href="@{/css/bootstrap.main.css}" rel="stylesheet"/>
+</head>
+<body>
+<div th:insert="~{fragments/menu :: #nav-menu}"></div>
+<section class="h-100" style="background-color: #eee;">
+    <div class="container h-100 py-5">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-10">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h3 class="fw-normal mb-0 text-black">Shopping Cart</h3>
+                    <div>
+                        <h3 class="fw-normal mb-0 text-black" align="right">Total: <b th:text="${cart.sum}"></b></h3>
+                    </div>
+                </div>
+                <tr th:each="detail : ${cart.cartDetails}">
+                    <div class="card rounded-3 mb-4">
+                        <div class="card-body p-4">
+                            <div class="row d-flex justify-content-between align-items-center">
+                                <div class="col-md-2 col-lg-2 col-xl-2">
+                                    <img src="/images/CartProductPic.webp" class="img-fluid rounded-3">
+                                </div>
+                                <div class="col-md-3 col-lg-3 col-xl-3">
+                                    <p th:text="${detail.title}" class="lead fw-normal mb-2">Title</p>
+                                </div>
+                                <div class="col-md-3 col-lg-3 col-xl-3">
+                                    <p th:text="${detail.amount}" class="lead fw-normal mb-2">0</p>
+                                </div>
+                                <div class="col-md-3 col-lg-3 col-xl-3">
+                                    <span th:utext="${'&#36;'}" class="lead fw-normal mb-2"></span>
+                                    <span th:text="${detail.price}" class="lead fw-normal mb-2">00.0</span>
+                                </div>
+                                <div class="col-md-3 col-lg-3 col-xl-3">
+                                    <span th:utext="${'Sum: '+'&#36;'}" class="lead fw-normal mb-2"></span>
+                                    <span th:text="${detail.sum}" class="lead fw-normal mb-2">00.0</span>
+                                </div>
+                                <div class="col-md-1 col-lg-1 col-xl-1 text-end">
+                                    <form th:action="@{/cart/remove}" method="post">
+                                        <input type="hidden" name="id" th:value="${detail.productId}"/>
+                                        <input type="submit" value="remove" class="btn btn-danger"/>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </tr>
+                <div class="card">
+                    <div class="card-body">
+                        <form align="left" th:action="@{/cart/removeAll}" method="post">
+                            <button type="submit" class="btn btn-danger btn-block btn-lg">Remove all</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <form align="left" th:action="@{/cart}" method="post">
+                            <button type="submit" class="btn btn-warning btn-block btn-lg">Create Order</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

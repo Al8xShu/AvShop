@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>A&M menu</title>
+    <link th:href="@{/css/bootstrap.main.css}" rel="stylesheet"/>
+</head>
+<body>
+<table id="nav-menu" width="60%">
+    <header class="p-1 bg-info text-white">
+        <div class="container">
+            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                    <li><a th:href="@{/}" class="nav-link px-2 text-white">A&M</a></li>
+                    <li><a th:href="@{/products}" class="nav-link px-2 text-white">Products</a></li>
+                    <li><a sec:authorize="isAuthenticated()" th:href="@{/cart}" class="nav-link px-2 text-white">Cart</a></li>
+                    <li><a sec:authorize="isAuthenticated()" th:href="@{/orders}" class="nav-link px-2 text-white">Orders</a></li>
+                    <li><a sec:authorize="hasAnyAuthority('ADMIN', 'MANAGER')" th:href="@{/users}" class="nav-link px-2 text-white">Users</a></li>
+                    <li><a th:href="@{/ws/products.wsdl}" class="nav-link px-2 text-white">For developers</a></li>
+                </ul>
+                <div class="text-end">
+                    <div sec:authorize="!isAuthenticated()">
+                        <a th:href="@{/login}" class="btn bt-warning text-decoration-none text-white">Log in</a>
+                        <a th:href="@{/signIn}" class="btn bt-warning text-decoration-none text-warning">Sign in</a>
+                    </div>
+                    <div sec:authorize="isAuthenticated()">
+                        <a th:href="@{/users/profile}" class="text-decoration-none text-white">
+                            <span sec:authentication="principal.username" class="btn text-white">UserName</span>
+                        </a>
+                        <a th:href="@{/logout}" class="btn bt-warning text-decoration-none text-warning">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+</table>
+</body>
+</html>

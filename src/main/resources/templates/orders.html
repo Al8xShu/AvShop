@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>A&M orders</title>
+    <link th:href="@{/css/bootstrap.main.css}" rel="stylesheet"/>
+    <link th:href="@{/css/order.background.css}" rel="stylesheet"/>
+</head>
+<body>
+<div th:insert="~{fragments/menu :: #nav-menu}"></div>
+<section class="h-100 gradient-custom">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-lg-10 col-xl-8">
+                <div class="card" style="border-radius: 10px;">
+                    <div class="card-header px-4 py-5">
+                        <h5 class="text-muted mb-0">Thanks for your orders,
+                            <span sec:authentication="principal.username" style="color: #a8729a;">UserName</span> !
+                        </h5>
+                    </div>
+                    <tr th:each="order : ${orders}">
+                        <div class="card-body p-4">
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <p class="lead fw-normal mb-0" style="color: #a8729a;">Order</p>
+                                <p th:text="${order.id}">Id</p>
+                            </div>
+                            <div class="card shadow-0 border mb-4">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <img src="/images/OrderPic.webp" class="img-fluid">
+                                        </div>
+                                        <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                                            <p class="text-muted mb-0">total</p>
+                                        </div>
+                                        <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                                            <p th:utext="${'&#36;'}" class="text-muted mb-0 small"></p>
+                                            <p th:text="${order.sum}" class="text-muted mb-0 small">00.0</p>
+                                        </div>
+                                    </div>
+                                    <hr class="mb-4" style="background-color: #e0e0e0; opacity: 1;">
+                                    <div class="row d-flex align-items-center">
+                                        <div class="col-md-2">
+                                            <p th:text="${order.status}" class="text-muted mb-0 small">Status</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </tr>
+                    <div class="card-footer border-0 px-4 py-5"
+                         style="background-color: #a8729a; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

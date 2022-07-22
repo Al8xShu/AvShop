@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>A&M sign-in</title>
+    <link th:href="@{/css/bootstrap.main.css}" rel="stylesheet"/>
+    <link th:href="@{/css/signin.background.css}" rel="stylesheet"/>
+</head>
+<body align="center">
+<div th:insert="~{fragments/menu :: #nav-menu}"></div>
+<section class="h-100 gradient-form" style="background-color: #eee;">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-xl-10">
+                <div class="card rounded-3 text-black">
+                    <div class="row g-0">
+                        <div class="col-lg-6">
+                            <div class="card-body p-md-5 mx-md-4">
+                                <div class="text-center">
+                                    <img src="/images/signin_logo.png" style="width: 185px;" alt="logo">
+                                    <h4 class="mt-1 mb-5 pb-1">Team</h4>
+                                </div>
+                                <form th:action="@{/signIn}" th:object="${user}" method="post">
+                                    <p class="center">Please create your account</p>
+                                    <div class="form-outline mb-4">
+                                        <input th:field="*{username}" type="text" id="form2Example11" class="form-control"/>
+                                        <label class="form-label" for="form2Example11">Name</label>
+                                    </div>
+                                    <div class="form-outline mb-4">
+                                        <input th:field="*{password}" type="password" id="form2Example22" class="form-control" />
+                                        <label class="form-label" for="form2Example22">Password</label>
+                                    </div>
+                                    <div class="form-outline mb-4">
+                                        <input th:field="*{matchingPassword}" type="password" id="form2Example22" class="form-control" />
+                                        <label class="form-label" for="form2Example22">Matching</label>
+                                    </div>
+                                    <div class="form-outline mb-4">
+                                        <input th:field="*{email}" type="email" id="form2Example22" class="form-control" />
+                                        <label class="form-label" for="form2Example22">Email</label>
+                                    </div>
+                                    <div class="text-center pt-1 mb-5 pb-1">
+                                        <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="submit">Create</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
+                            <div class="text-white px-3 py-4 p-md-5 mx-md-4">
+                                <h4 class="center mb-4">Welcome on board, have a nice day!</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

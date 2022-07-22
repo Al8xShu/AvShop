@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>A&M products</title>
+    <link th:href="@{/css/bootstrap.main.css}" rel="stylesheet"/>
+    <!--STOMP-->
+    <script src="/webjars/sockjs-client/sockjs.min.js"></script>
+    <script src="/webjars/stomp-websocket/stomp.min.js"></script>
+    <!--app.js dependence: jquery-->
+    <script src="/webjars/jquery/jquery.min.js"></script>
+    <script src="/javascript/product.js"></script>
+</head>
+<body>
+<div th:insert="~{fragments/menu :: #nav-menu}"></div>
+<p sec:authorize="!isAuthenticated()" class="font-weight-normal text-secondary" align="center">Sign in or Log in to create order.</p>
+<br sec:authorize="isAuthenticated()">
+<section class="ftco-section">
+    <div class="container">
+        <div class="row justify-content-center"></div>
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="table-wrap">
+                    <table class="table" id="table">
+                        <thead class="thead-primary opacity-50 bg-success">
+                        <tr>
+                            <th class="text-white">Product</th>
+                            <th class="text-white">Price</th>
+                            <th sec:authorize="isAuthenticated()" class="text-white">Action</th>
+                            <th sec:authorize="hasAnyAuthority('ADMIN', 'MANAGER')" class="text-white">Admin</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="product : ${products}" class="alert" role="alert">
+                            <td>
+                                <div class="email">
+                                    <img src="/images/box.png" alt="" style="width: 40px; height: 40px"/>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;<span th:text="${product.title}">Product</span>
+                                </div>
+                            </td>
+                            <td>
+                                <span th:utext="${'&#36;'+'&nbsp;'}"></span></b><span th:text="${product.price}"></span>
+                            </td>
+                            <td sec:authorize="isAuthenticated()">
+                                <a th:href="@{/products/{id}/cart/(id=${product.id})}"
+                                   class="text-decoration-none opacity-50 btn btn-success">Add to cart</a>
+                            </td>
+                            <td sec:authorize="hasAnyAuthority('ADMIN', 'MANAGER')">
+                                <a th:href="@{/products/deleteFromBase/(productId=${product.Id})}"
+                                   class="text-decoration-none btn btn-danger">Delete</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<br>
+<form sec:authorize="hasAnyAuthority('ADMIN', 'MANAGER')" style="text-align: center">
+    <table align="center">
+        <tr class="form-outline mb-4">
+            <td>Product</td>
+            <td><input class="form-control" type="text" id="title"></td>
+        </tr>
+        <tr class="form-outline mb-4">
+            <td>Price</td>
+            <td><input class="form-control" type="number" id="price"></td>
+        </tr>
+    </table>
+    <button id="send" type="submit" class="text-decoration-none btn btn-danger">Add</button>
+</form>
+</body>
+</html>
